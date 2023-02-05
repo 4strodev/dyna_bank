@@ -6,5 +6,5 @@ import (
 )
 
 type AccountRepository interface {
-	Find() ([]account_models.Account, errors.ApplicationError)
+	Find() ([]account_models.Account, errors.ApplicationErrorInterface)
 }

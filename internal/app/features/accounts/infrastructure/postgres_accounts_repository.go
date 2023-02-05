@@ -2,7 +2,6 @@ package infrastructure
 
 import (
 	"database/sql"
-	"fmt"
 	"log"
 
 	"github.com/4strodev/dyna-bank/internal/app/features/accounts/domain/models"
@@ -19,15 +18,14 @@ type PostgresAccountRepository struct {
 	pool *sql.DB
 }
 
-func (self PostgresAccountRepository) Find() ([]models.Account, errors.ApplicationError) {
-	var accounts []models.Account
+func (self PostgresAccountRepository) Find() ([]models.Account, errors.ApplicationErrorInterface) {
+	var accounts []models.Account = make([]models.Account, 0)
 
 	rows, err := self.pool.Query("SELECT id, name, user_id, summary FROM application.accounts")
 	if err != nil {
-		return accounts, errors.NewInfrastructureError(fmt.Sprintf("Error getting data from database: %s", err.Error()))
+		return accounts, errors.NewInfrastructureError("Error getting data from database").WithMetadata(err)
 	}
 	defer rows.Close()
-
 
 	// Parsing values
 	for rows.Next() {
@@ -35,7 +33,7 @@ func (self PostgresAccountRepository) Find() ([]models.Account, errors.Applicati
 		err = rows.Scan(&account.Id, &account.Name, &account.UserID, &account.Summary)
 		if err != nil {
 			log.Println(err)
-			return []models.Account{}, errors.NewInfrastructureError("Error parsing accounts to struct")
+			return []models.Account{}, errors.NewInfrastructureError("Error parsing accounts to struct").WithMetadata(err)
 		}
 		accounts = append(accounts, account)
 	}

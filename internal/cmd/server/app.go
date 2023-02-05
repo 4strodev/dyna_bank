@@ -6,6 +6,7 @@ import (
 
 	_ "github.com/joho/godotenv/autoload"
 	accounts_infrastructure "github.com/4strodev/dyna-bank/internal/app/features/accounts/infrastructure"
+	"github.com/4strodev/dyna-bank/internal/app/features/users/infrastructure"
 	app_errors "github.com/4strodev/dyna-bank/internal/app/shared/errors"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/recover"
@@ -22,6 +23,7 @@ func init() {
 	//Use recover middleware to don't stop application
 	app.Use(recover.New())
 	accounts_infrastructure.InitRoutes("/accounts", app)
+	infrastructure.InitRoutes("/users", app)
 }
 
 func errorHandler(c *fiber.Ctx, err error) error {
