@@ -1,0 +1,20 @@
+# https://taskfile.dev
+
+version: '3'
+
+vars:
+  PROJECT_NAME: Dyna Bank
+  BIN: dyna_bank
+
+tasks:
+  build:
+    cmds:
+      - echo "Building {{.PROJECT_NAME}}"
+      - go build -o ./bin/{{.BIN}} ./internal/cmd/server
+    silent: true
+  run:
+    cmds:
+      - echo "Executing {{.PROJECT_NAME}} in developent mode"
+      - air
+    silent: true
+
