@@ -4,7 +4,6 @@ import (
 	"errors"
 	"log"
 
-	_ "github.com/joho/godotenv/autoload"
 	accounts_infrastructure "github.com/4strodev/dyna-bank/internal/app/features/accounts/infrastructure"
 	"github.com/4strodev/dyna-bank/internal/app/features/users/infrastructure"
 	app_errors "github.com/4strodev/dyna-bank/internal/app/shared/errors"

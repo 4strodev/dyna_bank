@@ -1,0 +1,13 @@
+services:
+  dyna-bank-server:
+    build: .
+    restart: always
+    ports:
+      - "3000:3000"
+    network_mode: "host"
+    environment:
+      DB_HOST: "localhost"
+      DB_PORT: "5432"
+      DB_NAME: "dyna_bank"
+      DB_USER: "dyna_bank_application"
+      DB_PASSWORD: "dyna_bank"
