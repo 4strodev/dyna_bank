@@ -17,4 +17,8 @@ tasks:
       - echo "Executing {{.PROJECT_NAME}} in developent mode"
       - air
     silent: true
+  pg_dump:
+    cmds:
+      - pg_dump -s -t 'application.*' -d dyna_bank -U dyna_bank_admin  > ./internal/db/create_tables.sql
+    silent: true
 
